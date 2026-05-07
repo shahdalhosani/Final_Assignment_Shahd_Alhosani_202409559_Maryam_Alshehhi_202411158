@@ -2,19 +2,25 @@ In this section, we present the UML class diagram for the Smart Campus Facility 
 
 
 Description - Identify Classes and Relationships:
+
 In this section, we explained the relationships between each class, such as inheritance between Admin and User, and associations between User and Booking, and Booking and Facility. Additionally, the BookingSystem class is associated with User, Booking, and Facility. We also explained what each relationship mean within our system.
 
 User:
+
 The User class represents any person who uses the system, such as a student or a staff member. In this class, we included important details like user ID, name, email, password, and access type (for example, standard or premium). These details help identify the user and allow them to log in. We also included methods such as login() to allow the user to access the system and upgrade_access() to change their access level. In addition, getter and setter methods are included so that the system can safely read and update user information when needed. The User class is connected to the Booking class, where one user can make zero or many bookings (0..*). This means a user might not have any bookings yet, or they can have multiple bookings. The User class is also connected to the BookingSystem class, which manages all users in the system.
 
-Admin:
+Admin
+
 The Admin class represents a special type of user who has more control over the system. In this class, we included an admin ID and methods such as view_bookings(), update_facility(), and upgrade_user(). These methods allow the admin to monitor and manage the system. The Admin class is connected to the User class through inheritance, which means Admin inherits from User and has all the basic features of a normal user with extra permissions. Because of this, the admin can use all the features of the User class in addition to their own.
 
-Facility:
+Facility
+
 The Facility class represents the places or resources that can be booked, such as study rooms, lecture halls, or sports courts. In this class, we included details like facility ID, name, facility type, capacity, time slots, and price per hour. These details help users choose the right facility and understand its availability and cost. We also added methods like check_availability() to see if the facility is free and update_availability() to change its schedule. Getter and setter methods are included to manage facility data. The Facility class is connected to the Booking class, where one facility can be linked to many bookings (0..*). This means the same facility can be booked multiple times by different users at different times. The Facility is also connected to the BookingSystem class, which manages all facilities.
 
-Booking:
+Booking
+
 The Booking class represents a reservation made by a user. This class connects the User and Facility classes, meaning each booking is made by one user and is for one facility. In this class, we included attributes such as booking ID, user, facility, date, time slot, duration, total cost, and status. The user and facility attributes store references to the User and Facility objects, which helps connect the booking to the correct person and the correct facility. These details help track and manage each reservation. We also added methods like calculate_cost() to calculate the total price based on time and facility, confirm_booking() to confirm the reservation, and cancel_booking() to cancel it if needed. Getter and setter methods are included to manage booking data. The receipt details are also handled inside this class through total_cost, status, and booking confirmation. The Booking class is connected to the User class (many bookings for one user) and to the Facility class (many bookings for one facility). It is also connected to the BookingSystem class, which stores and manages all bookings.
 
-BookingSystem:
+BookingSystem
+
 The BookingSystem class represents the main system that controls everything. It brings all parts together. In this class, we included lists of users, facilities, and bookings. These lists help store all the data in one place. We also included methods such as add_user() to add new users, add_facility() to add new facilities, login_user() to allow users to log in, make_booking() to create new bookings, and save_data() and load_data() to store and retrieve data using files. Getter and setter methods are also included to manage these lists. The BookingSystem class is connected to the User, Booking, and Facility classes, which shows that it manages all parts of the system.
